@@ -1,0 +1,10 @@
+#! /usr/bin/perl -w
+use strict;
+
+my $seq = '';
+while (<>) {
+ if (/^>/) {print "$seq\n" if $seq; print $_; $seq = ''; next}
+ chomp;
+ $seq .= $_;
+}
+print "$seq\n" if $seq;

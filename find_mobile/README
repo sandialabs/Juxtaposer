@@ -1,0 +1,39 @@
+----------------------
+Command Line Arguments
+----------------------
+
+Example: perl mobilome_hunter.pl --fna example/NC_000913.fna
+
+Input:
+	The only necessary file is a fasta file, labeled .fna
+The program then runs the mobile finding script
+	It requires perl scripts to be in the bin folder: 	integrase_finder.pl
+														pfscan
+														prodigal
+	It requires the following databases in the db folder:	famint9.hmm (integron_integrases)
+															PF00589_seed.hmm (recombinase family)
+															xers.prf (special XerC/D/H/S profile)
+															TnpPred_HMM_Profile3.hmm (Transposases from TnpPred + Serine Recombinases + Homing Endonuclease + Reverse Transcriptase + Resolvases)
+Output:
+	Several files are output:
+		1) example.gff
+		2) example.faa
+		3) example.recomb.tbl
+		4) example.recomb.hmm.txt
+		5) example.recomb.domtbl
+		6) example.integron.tbl
+		7) example.integron.hmm.txt
+		8) example.integron.domtbl
+		9) example.int
+		10) example.xer
+		11) example.phage
+		12) example.integrons
+		13) example.mobile.tbl
+		14) example.mobile.domtbl
+		**15) example.mobile.gff (MAIN OUTPUT)
+		*16) example.mobile.bed (MAIN OUTPUT IN BED FORMAT)
+Dependencies:
+	hmmsearch (version 3.0 or later)
+	Perl Modules --- uses Getopt::Long, Pod::Usage, Cwd, Attribute::Handlers
+	If prodigal doesn't work for you, compile it from https://github.com/hyattpd/prodigal/releases/ and put it in the bin/ directory
+	If pfscan doesn't work for you, compile it from http://web.expasy.org/pftools/#Downloads look in the pftools binary directory and put pfscan in the bin/ directory
