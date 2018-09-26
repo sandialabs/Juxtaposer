@@ -36,8 +36,7 @@ for (1..$#ARGV) {
   for my $att (keys %regexs) {
    next unless $seq =~ $regexs{$att};
    $att =~ /^(.*)\.(rev|fwd)$/;
-   $seq = Revcomp($seq) if $2 eq 'rev';
-   push @{$hits{$1}}, $seq;
+   if ($2 eq 'fwd') {push @{$hits{$1}}, $seq} else {push @{$hits{$1}}, Revcomp($seq)}
   }
  }
  close IN;
@@ -50,7 +49,7 @@ for my $island (sort keys %queries) {
   if ($hits{"$island.$att"}) {$ct{$att} = scalar(@{$hits{"$island.$att"}})}
   else {$ct{$att} = 0}
  }
- print "# $island ", join(',', @atts); for (@atts) {print "\t$ct{$_}"} print "\n";
+ print "## $island ", join(',', @atts); for (@atts) {print "\t$ct{$_}"} print "\n";
  for my	$att (@atts) {if ($hits{"$island.$att"}) {print join("\n", "# $island $att", @{$hits{"$island.$att"}}), "\n\n"}}
 }
 
