@@ -1,0 +1,52 @@
+To test your Juxtaposer installation:
+Prepare a file genome.fa containing the fastA form of CP015117.1 (https://www.ncbi.nlm.nih.gov/nuccore/CP015117.1)
+$ cd Juxtaposer-master
+$ mkdir test
+$ cd test
+$ cp ../testreads.fq qf.fq
+$ mv [path]/genome.fa ./
+$ perl ../juxtaposer.pl	genome &> log
+
+This test job should run in ~1 minute. Results should look like this:
+$ head -n 2 juxtas.txt
+#dnaLo	CoordLo	dnaHi	CoordHi	config	call	overlap	origin	idLo	idHi	tnLo	tnOffsetLo	tnHi	tnOffsetHi	sampleRead	overlapSeq	readseq	seqLo	seqHi	count	sites	Mob	pctMob	shortDistMob
+CP015117.1	3086208	CP015117.1	4440627	+-	.	4	1	97.908	97.727	.	.	.	.	NS500534:171:H273TBGX9:4:23506:10134:12248_300	GGCCG/CGGC/ggata	ggatatgtgtataatatacAGGAGCGGGGGATGAACGTCGATGGAGCCGACGACGAAGGCGACGACTGAAGCGCCACTGCTCCCATGAGCGACCCAACGGGGCCTTCGGGCCCCGTTTTTCATGGTCCGTCGCGCGCCCCTGCCAAGCGAGACGCCGCCCCAGCCTCGGCAGGGCGCCCGCCCGGAACCACCGGTCAAATCGTAGCGTAGGGCGAATAACCGCATCGCGGTTATCCGCCGATTGTGCAGGGCCG-CGGCggataacgcctatggcgttattcgccctacaggccgcagc-acAGGAGCtGGGGATGAACGTCGATGGAGCCGACGACGAAGGCGACGACTGAAGCGCCACTGCTCCCATGAGCGACCCAACGGGGCCTTCGGGCCCCGTTTTTCATGGTCCGTCGCGCGCCCCTGCCAAGCGAGACGCCGCCCCAGCCTCGGCAGGGCGCCCGCCCGGAACCACCGGTCAAATCGTAGCGTAGGGCGAATAACCGCATCGCGGTTATCCGCCGgTTcgGCAGGGCtGCGGC	CGGCGGATAACGCCcATGGCGTTATTCGCCCTACAGGCCGCAGC	1	0	
+
+$ ls -l
+-rw-rw-r-- 1 user group     190 Mar 18 08:23 bowtie.results
+-rw-rw-r-- 1 user group     300 Mar 18 08:23 counts.txt
+-rw-rw-r-- 1 user group 6470791 Mar 18 08:23 genome_clos_300.1.bt2
+-rw-rw-r-- 1 user group 1707092 Mar 18 08:23 genome_clos_300.2.bt2
+-rw-rw-r-- 1 user group      26 Mar 18 08:23 genome_clos_300.3.bt2
+-rw-rw-r-- 1 user group 1707085 Mar 18 08:23 genome_clos_300.4.bt2
+-rw-rw-r-- 1 user group 6828491 Mar 18 08:23 genome_clos_300.fa
+-rw-rw-r-- 1 user group     274 Mar 18 08:23 genome_clos_300.nhr
+-rw-rw-r-- 1 user group     108 Mar 18 08:23 genome_clos_300.nin
+-rw-rw-r-- 1 user group 1707087 Mar 18 08:23 genome_clos_300.nsq
+-rw-rw-r-- 1 user group 6470791 Mar 18 08:23 genome_clos_300.rev.1.bt2
+-rw-rw-r-- 1 user group 1707092 Mar 18 08:23 genome_clos_300.rev.2.bt2
+-rw-rw-r-- 1 user group 6827808 Mar 18 07:49 genome.fa
+-rw-rw-r-- 1 user group 2891686 Mar 18 08:23 genome.faa
+-rw-rw-r-- 1 user group 1454052 Mar 18 08:23 genome.gff
+-rw-rw-r-- 1 user group      78 Mar 18 08:23 genome.gnm
+-rw-rw-r-- 1 user group    3921 Mar 18 08:23 genome.int
+-rw-rw-r-- 1 user group    4694 Mar 18 08:23 genome.integron.domtbl
+-rw-rw-r-- 1 user group   22796 Mar 18 08:23 genome.integron.hmm.txt
+-rw-rw-r-- 1 user group       0 Mar 18 08:23 genome.integrons
+-rw-rw-r-- 1 user group    3551 Mar 18 08:23 genome.integron.tbl
+-rw-rw-r-- 1 user group      77 Mar 18 08:22 genome.lens
+-rw-rw-r-- 1 user group    2063 Mar 18 08:23 genome.mobile.bed
+-rw-rw-r-- 1 user group  226814 Mar 18 08:23 genome.mobile.domtbl
+-rw-rw-r-- 1 user group    3434 Mar 18 08:23 genome.mobile.gff
+-rw-rw-r-- 1 user group  168203 Mar 18 08:23 genome.mobile.tbl
+-rw-rw-r-- 1 user group    3921 Mar 18 08:23 genome.phage
+-rw-rw-r-- 1 user group    7036 Mar 18 08:23 genome.recomb.domtbl
+-rw-rw-r-- 1 user group   35006 Mar 18 08:23 genome.recomb.hmm.txt
+-rw-rw-r-- 1 user group    5345 Mar 18 08:23 genome.recomb.tbl
+-rw-rw-r-- 1 user group     458 Mar 18 08:23 genome.xer
+-rw-rw-r-- 1 user group   14266 Mar 18 08:23 juxtas.txt
+-rw-rw-r-- 1 user group    7344 Mar 18 08:23 log
+-rw-rw-r-- 1 user group    8111 Mar 18 08:23 nonstandard.blast
+-rw-rw-r-- 1 user group    7072 Mar 18 08:23 nonstandard.fa
+-rw-rw-r-- 1 user group   12753 Mar 18 08:23 nonstandard.fq
+-rw-rw-r-- 1 user group   12753 Mar 18 08:21 qf.fq
