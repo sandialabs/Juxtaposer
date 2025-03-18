@@ -10,9 +10,11 @@ Corey Hudson
 
 Repo maintained by: Ellis Torrance, eltorra@sandia.gov
 
-## Citations
+## CITATIONS
+If using Juxtaposer in your research please cite:
+[Schoeniger JS, Hudson CM, Bent ZW, Sinha A, Williams KP. Experimental single-strain mobilomics reveals events that shape pathogen emergence. Nucleic Acids Res. 2016 Aug 19;44(14):6830-9. doi: 10.1093/nar/gkw601. Epub 2016 Jul 4. PMID: 27378783; PMCID: PMC5001619.](https://academic.oup.com/nar/article/44/14/6830/2468219)
 
-
+Please also cite the associate publications of the Juxtaposer dependencies.
 
 ## SOFTWARE DEPENDENCIES
  - bowtie2 and bowtie2-build in path
