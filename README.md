@@ -27,9 +27,9 @@ Instutions for installing these dependencies in a conda environment is available
 
 ## INSTALLATION
 
-1. Download the github repo from https://github.com/sandialabs/Juxtaposer or copy it with wget:
+1. Download the github repo from https://github.com/sandialabs/Juxtaposer or clone it with git:
 ```
-wget https://github.com/sandialabs/Juxtaposer
+git clone https://github.com/sandialabs/Juxtaposer.git
 ```
 2. Make Juxtaposer files callable system wide by adding the following to your bash profile. Then, restart the terminal session or use source to reload your bash profile 
 ```
