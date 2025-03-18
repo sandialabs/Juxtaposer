@@ -1,0 +1,16 @@
+nonstandard=19 genomic=19 multi=19 double=10 shift=19 circleJxn=19 scar=10 palindrome=0 transpose=0 tn=0
+overlap -94=1
+overlap -87=1
+overlap -49=1
+overlap -41=1
+overlap -27=1
+overlap -14=1
+overlap -6=1
+overlap -3=1
+overlap 0=1
+overlap 1=1
+overlap 2=2
+overlap 4=1
+overlap 5=2
+overlap 9=3
+overlap 11=1

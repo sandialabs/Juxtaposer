@@ -26,5 +26,6 @@ close OUT;
 close GNM;
 
 sub Jxn {
- return "$head\n$seq\n${head}_CLOSURE_$readlen\n" . substr($seq, -1 * $readlen) . substr($seq, 0, $readlen) . "\n";
+ my $headclos = $head; $headclos =~ s/^(>\S+)/${1}_CLOSURE_$readlen/;
+ return "$head\n$seq\n$headclos\n" . substr($seq, -1 * $readlen) . substr($seq, 0, $readlen) . "\n";
 }

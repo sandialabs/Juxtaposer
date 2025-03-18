@@ -12,7 +12,7 @@ our $verbose;
 our $scriptname = $0;
 our $dir = dirname($0);
 our $VERSION = '0.1';
-my $fna = "";
+my ($cpu, $fna) = (1, "");
 ############################################
 #                Options                   #
 ############################################
@@ -26,6 +26,7 @@ else{
 	       'man' => sub {pod2usage(-exitstatus => 0, -verbose => 2);},
 	       'verbose' => \$verbose,
 	       'fna=s' => \$fna,
+               'cpu=i' => \$cpu,
 	) ;
 }
 unless(-e $fna){
@@ -126,7 +127,7 @@ sub run_tpn_finder{
 	my ($filename, $dirs, $suffix) = fileparse($faa, qr/\.[^.]*/);
 	my $tbl = $dirs.$filename.".mobile.tbl";
 	my $domtbl = $dirs.$filename.".mobile.domtbl";
-	`$dir/bin/hmmsearch --tblout $tbl --domtblout $domtbl --noali --cut_tc --cpu 20 $dir/db/TnpPred_HMM_Profiles3.hmm $faa`;
+	`$dir/bin/hmmsearch --tblout $tbl --domtblout $domtbl --noali --cut_tc --cpu $cpu $dir/db/TnpPred_HMM_Profiles3.hmm $faa`;
 	return($tbl);
 }
 
@@ -136,7 +137,7 @@ sub run_integrase_finder{
         my ($filename, $dirs, $suffix) = fileparse($fna, qr/\.[^.]*/);
 	my $phage_integrase = $dirs.$filename.".phage";
 	my $integron_integrase = $dirs.$filename.".integrons";
-	my $output = `perl $dir/bin/integrase_finder.pl --faa $faa --gff $gff --cpu 5 --fam $dir/db/PF00589_seed.hmm --int $dir/db/famint9.hmm --xer $dir/db/xers.prf --out`;
+	my $output = `perl $dir/bin/integrase_finder.pl --faa $faa --gff $gff --cpu $cpu --fam $dir/db/PF00589_seed.hmm --int $dir/db/famint9.hmm --xer $dir/db/xers.prf --out`;
 	print $output;
 	return($phage_integrase, $integron_integrase);
 }

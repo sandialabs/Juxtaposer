@@ -8,7 +8,7 @@ my @keys = keys %fasta;
 my $pm = Parallel::ForkManager->new($ARGV[1]);
 foreach my $key (@keys){
     my $pid = $pm->start and next;
-    my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | ./pfscan -f - xer.prf";
+    my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | pfscan -f - xer.prf";
     my $exit = `$run`;
     if ($exit ne '' && $key ne ''){
 	print "$key\t$exit";

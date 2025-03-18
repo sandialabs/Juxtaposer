@@ -4,11 +4,11 @@ use strict;
 # Output note: Blast hit 1 in upper case, hit 2 flanked by slashes
 my (%dnas, %reads, %seqs, $head, %uids, %tns, %mobs);
 my ($delta, $xslen, $endwindow, $uniqlen) = ('^', 20000000, 5, 8);
-die "Usage: perl $0 referencePathPrefix maxReadLength\n" unless @ARGV == 2;
-my ($refdir, $readmax) = @ARGV;
+die "Usage: perl $0 referencePathPrefix maxReadLength palflag(0 or 1)\n" unless @ARGV > 1;
+my ($refdir, $readmax, $palflag) = @ARGV;
 
 my $spanlen = $readmax * 2;
-open IN, "$refdir.lens" or die "No $refdir.lens\n"; while (<IN>) {chomp; %{$dnas{$1}} = (linear => $_, len => $2) if s/^(\S+)\s+(\d+)\s*//} close IN; # Replicon length, circularity
+open IN, "$refdir.lens" or die "No $refdir.lens\n"; while (<IN>) {chomp; %{$dnas{$1}} = (linear => $_, len => $2) if s/^(\S+).*\t(\d+)\s*//} close IN; # Replicon length, circularity
 #for (keys %dnas) {print "$_ $dnas{$_}{len}\n"} exit;
 open IN, "nonstandard.fa"; while (<IN>) {chomp; if (/^>(\S+)/) {$head = $1; next} $seqs{$head} .= $_;} close IN; # Read sequences
 open IN, "$refdir.mobile.bed"; while (<IN>) {chomp; my @f = split "\t"; %{$mobs{$f[3]}} = (dna => $f[0], L => $f[1]+1, R => $f[2])} close IN; # Mobility genes
@@ -185,6 +185,7 @@ for my $read (keys %reads) {
     $config[3] = 'palindrome' if ($config[2] eq '--' or $config[2] eq '++') and $shift[5] < 10000;
     $len = $shift[5];
    }
+   next if $palflag and $config[3] eq 'palindrome';
    my $mobct = 0; for (0,1) {if ($tnend[$_][-2] eq '.') {$mobct ++}}
    if (not $config[3] and $mobct == 1) {$config[3] = 'transpose'} # One and only one hit is to a transposon end
    $config[3] = '.' unless $config[3];
@@ -258,6 +259,7 @@ for my $label (sort {$juxtas{$b}{ct} <=> $juxtas{$a}{ct}} keys %juxtas) {
  print OUT join("\t", $$hit1{dna}, $$line{coord}, $$hit2{dna}, $$line{coordp}, $$line{config}, $$line{call}, $$line{overlap}, $$line{origin}, $$hit1{id}, $$hit2{id}, $$line{mob1},
   $$line{mob1off}, $$line{mob2}, $$line{mob2off}, $$line{read}, $$line{jxn}, $$line{readseq}, $$line{hitseq1}, $$line{hitseq2}, $$line{ct}, $$line{sites}, $mobile) , "\n"; 
 }
+print OUT "# ok\n";
 close OUT;
 
 for (qw/nonstandard genomic multi double shift circleJxn scar palindrome transpose/) {$cts{$_} = 0 unless $cts{$_}; print "$_=$cts{$_} "} print "tn=$cts{tn}\n";

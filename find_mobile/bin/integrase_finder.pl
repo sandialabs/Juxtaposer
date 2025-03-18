@@ -224,7 +224,7 @@ sub remove_xers {
     my %ints;
     my @xers;
     foreach my $key (@keys){
-        my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | $dir/pfscan -f - $xer";
+        my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | pfscan -f - $xer"; #ET edit Nov14,2024 remove path to binary
         my $exit = `$run`;
         if ($exit eq '') {
             $ints{$key} = $fasta{$key};
@@ -236,7 +236,7 @@ sub remove_xers {
     #if ($#xers < 1){
     #    my %ints2;
     #    foreach my $key (@keys){          
-    #        my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | $dir/pfscan -C -1 -f - $xer";
+    #        my $run = "echo '>$fasta{$key}{head}\n$fasta{$key}{body}' | pfscan -C -1 -f - $xer";
     #        my $exit = `$run`;
     #        if ($exit eq '') {
     #            $ints2{$key} = $fasta{$key};
