@@ -31,6 +31,11 @@ Download the github repo from https://github.com/sandialabs/Juxtaposer or copy i
 ```
 wget https://github.com/sandialabs/Juxtaposer
 ```
+Make Juxtaposer files callable system wide by adding the following to your bash profile. Then, restart the terminal session or use source to reload your bash profile 
+```
+export PATH=<absolute path to juxtaposer folder>:$PATH
+```
+### (OPTIONAL) Creating a Juxtaposer Conda environment
 
 
 ## INPUT DIRECTORIES AND FILES
