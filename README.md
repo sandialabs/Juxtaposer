@@ -27,20 +27,33 @@ Instutions for installing these dependencies in a conda environment is available
 
 ## INSTALLATION
 
-Download the github repo from https://github.com/sandialabs/Juxtaposer or copy it with wget:
+1. Download the github repo from https://github.com/sandialabs/Juxtaposer or copy it with wget:
 ```
 wget https://github.com/sandialabs/Juxtaposer
 ```
-Make Juxtaposer files callable system wide by adding the following to your bash profile. Then, restart the terminal session or use source to reload your bash profile 
+2. Make Juxtaposer files callable system wide by adding the following to your bash profile. Then, restart the terminal session or use source to reload your bash profile 
 ```
 export PATH=<absolute path to juxtaposer folder>:$PATH
 ```
-### (OPTIONAL) Creating a Juxtaposer Conda environment
+3. Install Juxtaposer dependencies. See below for instructions on installation of these dependencies using conda.
 
+### (OPTIONAL) Creating a Juxtaposer [Conda](https://www.anaconda.com/docs/getting-started/miniconda/install) environment
+1. Create the Conda environment
+```
+conda create --name Juxtaposer -y
+```
+2. activate the Conda environment (Note, you will need to activate the conda environment every time before you run Juxtaposer)
+```
+conda activate Juxtaposer
+```
+3. install juxtaposer dependencies
+```
+conda config --add channels bioconda && conda install -y bowtie2 && conda install -y blast && conda install -y hmmer && conda install -y pftools && conda install -y bedtools
+```
 
 ## INPUT DIRECTORIES AND FILES
 
-Juxtaposer requires an initial directory containing a single fastq file named <ins>qf.fq</ins> (or qf.fq.gz if gunzipped) and the corresponding assembled genome in fasta format named <ins>genome.fa</ins> where all output files will be written. For the purpose of the readme, this folder will be called "ngsdir".
+Juxtaposer requires an initial directory containing a single fastq file named <ins>qf.fq</ins> (or qf.fq.gz if gunzipped) and the corresponding assembled genome in fasta format named <ins>genome.fa</ins> where all output files will be written. For the purpose of the readme, this folder will be called <ins>"ngsdir"</ins>.
 We recommend using a different ngsdir directory for each experimental sample.
 
 ### PREPARING READS
@@ -58,11 +71,11 @@ We have been using SE reads, but if you have PE reads, we recommend the followin
 bbduk or PEAR, aiming to remove primer sequences and low quality regions, and combine all merged read pairs and
 unmerged reads into the qf.fq input file.
 
-
 ## RUNNING JUXTAPOSER
-navigate to ngsdir
-$ perl scriptpath/juxtaposer.pl refDirPrefix &> log
-
+Juxtaposer must be run from the ngsdir. We also recomend sending print statements to a log file you can send to us in case troubleshooting is needed.
+```
+cd <path to ngsdir>; perl <path to juxtaposer>juxtaposer.pl genome &> log.txt
+```
 
 ## OUTPUTS
 An example of the files that are created by Juxtaposer are in the directory Test. You can also test run juxtaposer is installed correctly with all necessary dependencies by running it on this folder.
