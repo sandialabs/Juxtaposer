@@ -80,6 +80,7 @@ cd <path to ngsdir>; perl <path to juxtaposer>juxtaposer.pl genome &> log.txt
 ## OUTPUTS
 An example of the files that are created by Juxtaposer are in the directory Test. You can also test run juxtaposer is installed correctly with all necessary dependencies by running it on this folder.
 
+Here is a description of files and folders created by juxtaposer:
 refdir: Directory containing information about the reference genome, to which Juxtaposer will write some files.
 refPfx: refDir/prefix, where prefix is the part of the reference genome file preceding the .fa suffix
 refPfx.fa: Multi-fasta file with all replicons (dnas) in the genome
